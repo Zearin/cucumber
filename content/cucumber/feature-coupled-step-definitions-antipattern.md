@@ -8,11 +8,13 @@ title: Feature Coupled Step Definitions (Antipattern)
 
 > TODO: Generalize. Move to Step Definitions
 
-Feature-coupled step definitions are step definitions that can't be used across features or scenarios. This is evil because it may lead to an explosion of step definitions, code duplication and high maintenance costs.
+Feature-coupled Step Definitions are Step Definitions that can't be used across Features or Scenarios. 
+
+This is evil! It may lead to an explosion of Step Definitions, code duplication, and high maintenance costs.
 
 ## Example
 
-An imaginary resume application could have the following features and step files:
+An imaginary resume application could have the following Feature and step files:
 
 ```
 features/
@@ -25,7 +27,7 @@ features/
    +--edit_education_steps.rb
 ```
 
-The `edit_work_experience.feature` could have the following scenario:
+The `edit_work_experience.feature` could have the following Scenario:
 
 ```
 Scenario: add description
@@ -49,6 +51,6 @@ end
 
 \## Organise steps by domain concept. See [Step Organization](/cucumber/step-organization/).
 
-\## Rename step.rb files to a domain-related name (rather than feature/scenario-related name).
+\## Rename `step.rb` files to a domain-related name (rather than feature- or scenario-related name).
 
 \## Break up [Conjunction Steps (Antipattern)](/gherkin/conjunction-steps-antipattern/) steps into individual steps.
