@@ -6,23 +6,23 @@ source: https://github.com/cucumber/cucumber/wiki/Given-When-Then/
 title: Given When Then
 ---
 
-[Cucumber scenarios](/gherkin/feature-introduction/) consist of steps, also known as Givens, Whens and Thens.
+[Cucumber Scenarios](/gherkin/feature-introduction/) consist of Steps (also known as `Given`s, `When`s, and `Then`s).
 
-Cucumber doesn't technically distinguish between these three kind of steps. However, we strongly recommend that you do! These words have been carefully selected for their purpose, and you should know what the purpose is to get into the BDD mindset.
+Cucumber doesn't technically distinguish between these three kind of Steps. However, we strongly recommend that you do! These words have been carefully selected for their purpose, and you should know what the purpose is to get into the BDD mindset.
 
-Robert C. Martin has written a [great post](https://sites.google.com/site/unclebobconsultingllc/the-truth-about-bdd) about BDD's Given-When-Then concept where he thinks of them as a finite state machine.
+Robert C. Martin has written a [great post](https://sites.google.com/site/unclebobconsultingllc/the-truth-about-bdd) about BDD's Given-When-Then concept, where he conceptualizes them as a finite state machine.
 
 ## Given
 
-The purpose of givens is to **put the system in a known state** before the user (or external system) starts interacting with the system (in the When steps). Avoid talking about user interaction in givens. If you were creating use cases, givens would be your preconditions.
+The purpose of Givens is to **put the system in a known state** before the user (or external system) starts interacting with the system (in the When steps). Avoid talking about user interaction in Givens. If you were creating use cases, Givens would be your preconditions.
 
 Examples:
 
 - Create records (model instances) / set up the database state.
 - It's ok to call into the layer "inside" the UI layer here (in Rails: talk to the models).
-- Log in a user (An exception to the no-interaction recommendation. Things that "happened earlier" are ok).
+- Log in a user (An exception to the no-interaction recommendation. Things that "happened earlier" are okay).
 
-And for all the Rails users out there - we recommend using a [Given with a multiline table argument](https://github.com/aslakhellesoy/cucumber-rails-test/blob/master/features/manage_lorries.feature) to [set up records](https://github.com/aslakhellesoy/cucumber-rails-test/blob/master/features/step_definitions/lorry_steps.rb) instead of fixtures. This way you can read the scenario and make sense out of it without having to look elsewhere (at the fixtures).
+If you use Rails, we recommend using a [Given with a multiline table argument](https://github.com/aslakhellesoy/cucumber-rails-test/blob/master/features/manage_lorries.feature) to [set up records](https://github.com/aslakhellesoy/cucumber-rails-test/blob/master/features/step_definitions/lorry_steps.rb) instead of fixtures. This way, you can read the Scenario and make sense of it without having to look elsewhere (at the fixtures).
 
 ## When
 
@@ -30,24 +30,24 @@ The purpose of When steps is to **describe the key action** the user performs (o
 
 Examples:
 
-- Interact with a web page (Webrat/Watir/Selenium *interaction* etc should mostly go into When steps).
+- Interact with a web page (Webrat/Watir/Selenium *interaction* etc. should mostly go into When steps).
 - Interact with some other user interface element.
 - Developing a library? Kicking off some kind of action that has an observable effect somewhere else.
 
 ## Then
 
-The purpose of Then steps is to **observe outcomes**. The observations should be related to the business value/benefit in your feature description. The observations should also be on some kind of *output* - that is something that comes *out* of the system (report, user interface, message) and not something that is deeply buried inside it (that has no business value).
+The purpose of Then steps is to **observe outcomes**. The observations should be related to the business value/benefit in your Feature description. They should also describe some kind of *output*; that is, something that comes *out* of the system (e.g., a report, a user interface, or a message) and not something buried deep inside it (that has no business value).
 
 Examples:
 
 - Verify that something related to the Given+When is (or is not) in the output
 - Check that some external system has received the expected message (was an email with specific content sent?)
 
-While it might be tempting to implement Then steps to just look in the database - resist the temptation. You should only verify outcome that is observable for the user (or external system) and databases usually are not.
+While it might be tempting to implement Then steps to look into the database,  resist the temptation. You should only verify outcome that is observable by the user (or external system), and databases usually are not.
 
 ## And, But
 
-If you have several givens, whens or thens you can write
+If you have several Givens, Whens, or Thens, you can write
 
 ```gherkin
 Scenario: Multiple Givens
@@ -59,7 +59,7 @@ Then I see something
 Then I don't see something else
 ```
 
-Or you can make it read more fluently by writing
+Or, you can make it read more fluidly by writing
 
 ```gherkin
 Scenario: Multiple Givens
@@ -71,4 +71,4 @@ Then I see something
 But I don't see something else
 ```
 
-To Cucumber steps beginning with And or But are exactly the same kind of steps as all the others.
+To Cucumber, there is no difference between steps beginning with And or But and  steps beginning the other keywords.
