@@ -9,21 +9,25 @@ From the online Merriam-Webster dictionary:
 
 > **con·junc·tion** :an uninflected linguistic form that joins together sentences, clauses, phrases, or words
 
-Don't do this in steps. It makes steps too specialised and hard to reuse. Cucumber has built-in support for conjunctions (And, But) for a reason.
+Don't do this in Steps! It makes Steps too specialised and hard to reuse. Cucumber has built-in support for conjunctions (`And`, `But`) for a reason.
 
-## Example
+For example, don't do this:
 
 ```
+# don't write conjunctions _into_ steps...
 Given I have shades and a brand new Mustang
 ```
 
-## How to fix
+Instead, do this:
 
 ```
+# ...write conjunctions _as_ steps!
 Given I have shades
 And I have a brand new Mustang
 ```
 
-## When conjunction steps are OK
+## When conjunction Steps are okay
 
-Sometimes you may want to combine several steps into one to make your scenarios easier to read. [Calling Steps from Step Definitions](/implementations/ruby/calling-steps-from-step-definitions/) makes this possible, but make your life simpler by making the called steps atomic.
+Sometimes you may want to combine several Steps to make your Scenarios easier to read. This is certinaly possible to do (see [Calling Steps from Step Definitions](/implementations/ruby/calling-steps-from-step-definitions/)). 
+
+But make your life easier, and strive to keep your called Steps atomic.
