@@ -9,7 +9,7 @@ title: Cucumber Reference
 
 # Step Definition
 
-# cucumber.yml
+# `cucumber.yml`
 
 # Ruby
 
