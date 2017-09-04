@@ -8,7 +8,7 @@ title: Parameters in Step Definitions
 
 > TODO: Ruby specific feature. generalize.
 
-Step argument transforms help your step definitions be more by DRY by allowing you to refactor common operations that you perform on step definition arguments. Before each match captured by a step definition is yielded as an argument to the step definition block, an attempt is made to match them against registered `Transform` objects. If one of those captured matches match the regular expression of one of a `Transform` objects, its original string value is replaced with the result of what the `Transform` block yields.
+Step argument transforms help your Step Definitions be more by DRY, by allowing you to refactor common operations that you perform on Step Definition arguments. Before each match captured by a Step Definition is yielded as an argument to the Step Definition block, an attempt is made to match them against registered `Transform` objects. If one of those captured matches match the regular expression of one of a `Transform` objects, its original string value is replaced with the result of what the `Transform` block yields.
 
 ## Registering a Transform
 
@@ -22,12 +22,12 @@ end
 ```
 
 - Uses the keyword `Transform`
-- Has a regular expression that is compared against all the captures of the step definition
-- Implements a block whose result is sent to the step definition block as the matching argument
+- Has a regular expression that is compared against all the captures of the Step Definition
+- Implements a block whose result is sent to the Step Definition block as the matching argument
 
 ## Transforms in Execution
 
-An example, the following Transform converts any step definition captures that match digits and converts them automatically to integers.
+An example, the following Transform converts any Step Definition captures that match digits and converts them automatically to integers.
 
 ```ruby
 
@@ -119,7 +119,7 @@ Transforms are powerful and it is important to take care how you implement them.
 
 **1. Transforms always require that you specify a block variable even if you do not specify any groups to capture.**
 
-With no capture groups specified the entire value is returned as a string to the block. This is contrast to how step definitions perform and can often trip you up. Cucumber will fail execution with a warning when you fail to specify at least one variable.
+With no capture groups specified the entire value is returned as a string to the block. This is contrast to how Step Definitions perform and can often trip you up. Cucumber will fail execution with a warning when you fail to specify at least one variable.
 
 ```ruby
 
@@ -136,7 +136,7 @@ With no capture groups specified the entire value is returned as a string to the
    end
    ```
 
-When you specify capture groups, each capture will be yielded to the block as you have likely come to expect from step definitions.
+When you specify capture groups, each capture will be yielded to the block as you have likely come to expect from Step Definitions.
 
 ```ruby
 
@@ -148,7 +148,7 @@ When you specify capture groups, each capture will be yielded to the block as yo
 
 **2. Ensure that you specify the caret (^) and dollar sign ($) at the start and end of the regular expression.**
 
-The following transform, adds onto the integer conversion before it, treats an 'a' or 'an' as the integer value of 1. This may be useful in step definitions where you might want to say something like *"a user"* instead of *"1 user"*.
+The following transform, adds onto the integer conversion before it, treats an 'a' or 'an' as the integer value of 1. This may be useful in Step Definitions where you might want to say something like *"a user"* instead of *"1 user"*.
 
 ```ruby
 
@@ -158,9 +158,9 @@ The following transform, adds onto the integer conversion before it, treats an '
    end
    ```
 
-However, removing the caret and dollar sign will allow this step definition to match **ANY** step definition captures that have the value *a* in it. This will likely wreak havoc as the value 1 starts appearing in a large set of your step definitions.
+However, removing the caret and dollar sign will allow this Step Definition to match **ANY** Step Definition captures that have the value *a* in it. This will likely wreak havoc as the value 1 starts appearing in a large set of your Step Definitions.
 
-**3. Capture contextual information in your step definitions to ensure that the correct transform is used.**
+**3. Capture contextual information in your Step Definitions to ensure that the correct transform is used.**
 
 ```ruby
 Transform /^a user,? named '(\[^']+)',?$/ do |name|
@@ -175,11 +175,11 @@ end
    end
 ```
 
-Without a transform you would have likely only wanted to match the value in the single-quotes. However, matching only the name would likely open our transform up to a large number of arguments and we wouldn't be assured that we were getting a user. So in your step definitions use additional contextual information in your matches and let your Transforms filter the data further.
+Without a transform you would have likely only wanted to match the value in the single-quotes. However, matching only the name would likely open our transform up to a large number of arguments and we wouldn't be assured that we were getting a user. So in your Step Definitions use additional contextual information in your matches and let your Transforms filter the data further.
 
 **4. Register a `Transform` close to where it is being employed.**
 
-The best strategy is to define your transforms in the same file that they are used. When a transform is used by a large number of step definitions move the transform to a unique file in the support directory (e.g. `step_definitions/support/numeric_transforms.rb`).
+The best strategy is to define your transforms in the same file that they are used. When a transform is used by a large number of Step Definitions move the transform to a unique file in the support directory (e.g. `step_definitions/support/numeric_transforms.rb`).
 
 **5. The order that Transforms are loaded matter as they will take precedence over previously defined transforms.**
 
