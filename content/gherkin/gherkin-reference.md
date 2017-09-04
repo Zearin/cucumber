@@ -11,13 +11,14 @@ the [[documentation overview]] for links to platform-specific documentation.
 
 ## Gherkin
 
-Cucumber executes your `.feature` files, and those files contain executable specifications
-written in a language called Gherkin.
+Cucumber executes your `.feature` files, and those files contain executable
+specifications written in a language called Gherkin.
 
-Gherkin is plain-text English (or one of 60+ other languages) with a little extra structure.
-Gherkin is designed to be easy to learn by non-programmers, yet structured enough to
-allow concise description of examples to illustrate business rules in most real-world
-domains.
+Gherkin is plain-text English (or one of 60+ other languages) with a little
+extra structure. Gherkin is designed to be easy to learn by non-programmers,
+yet structured enough to allow concise description of examples to illustrate
+business rules in most real-world domains.
+
 
 Here is a sample Gherkin document:
 
@@ -31,8 +32,10 @@ Feature: Refund item
     Then Jeff should be refunded $100
 ```
 
-In Gherkin, each line that isn't blank has to start with a Gherkin *keyword*,
-followed by any text you like. The main keywords are:
+In Gherkin, each line that isn't blank must start with a Gherkin *keyword*,
+followed by any text you like. 
+
+The main keywords are:
 
 - `Feature`
 - `Scenario`
@@ -48,18 +51,22 @@ There are a few extra keywords as well:
 - `@` (Tags)
 - `#` (Comments)
 
+
 ### Feature
 
 A `.feature` file is supposed to describe a single feature of the system, or a
 particular aspect of a feature. It's just a way to provide a high-level description
-of a software feature, and to group related scenarios.
+of a software feature, and to group related Scenarios.
 
-A feature has three basic elements---the `Feature:` keyword, a *name* (on the same line)
-and an optional (but highly recommended) *description* that can span multiple lines.
+A Feature has three basic elements:
 
-Cucumber does not care about the name or the description---the purpose is simply
-to provide a place where you can document important aspects of the feature, such
-as a brief explanation and a list of business rules (general acceptance criteria).
+1. the `Feature:` keyword,
+2. a *name* (on the same line),
+3. and optionally (but highly recommended), a *description*, which can span multiple lines.
+
+Cucumber does not care about the name or the description. Their purpose is simply
+to document important aspects of the Feature, such as a brief explanation and a 
+list of business rules (general acceptance criteria).
 
 Here is an example:
 
@@ -75,26 +82,26 @@ Feature: Refund item
   - Purchase must be less than 30 days ago
 ```
 
-In addition to a *name* and a *description*, features contain a list of [Scenarios](#scenario)
-or [Scenario Outlines](#scenario-outlines), and an optional [Background](#background).
+In addition to a *name* and a *description*, Features contain a list of [Scenarios](#Scenario)
+or [Scenario Outlines](#Scenario-outlines), and an optional [Background](#background).
 
 ### Descriptions
 
 Some parts of Gherkin documents do not have to start with a keyword.
 
 On the lines following a `Feature`, `Scenario`, `Scenario Outline` or `Examples`
-you can write anything you like, as long as no line starts with a key a keyword.
+you can write anything you like, as long as no line starts with a keyword.
 
 ### Scenario
 
-A scenario is a *concrete example* that *illustrates* a business rule. It consists of
-a list of [steps](#steps).
+A Scenario is a *concrete example* that *illustrates* a business rule. It consists of
+a list of [Steps](#Steps).
 
-You can have as many steps as you like, but we recommend you keep the number at 3-5 per scenario.
-If they become longer than that they lose their expressive power as specification and documentation.
+You can have as many Steps as you like, but we recommend you keep the number at 3–5 per Scenario.
+If they become longer, they lose their expressive power as specification and documentation.
 
-In addition to being a specification and documentation, a scenario is also a *test*.
-As a whole, your scenarios are an *executable specification* of the system.
+In addition to being a specification and documentation, a Scenario is also a *test*.
+As a whole, your Scenarios are an *executable specification* of the system.
 
 Scenarios follow the same pattern:
 
@@ -102,48 +109,62 @@ Scenarios follow the same pattern:
 - Describe an event
 - Describe an expected outcome
 
-This is done with steps.
+This is accomplished with Steps.
 
 ### Steps
 
-A step typically starts with `Given`, `When` or `Then`. If there are multiple `Given` or `When`
-steps underneath each other, you can use `And` or `But`. Cucumber does not differentiate between
-the keywords, but choosing the right one is important for the readability of the scenario as a whole.
+A Step typically starts with `Given`, `When` or `Then`. If there are multiple
+`Given` or `When` Steps underneath each other, you can use `And` or `But`.
+
+
+Cucumber does not differentiate between the keywords, but choosing the right
+one is important for the readability of the Scenario as a whole.
 
 #### Given
 
-`Given` steps are used to describe the initial context of the system---the *scene* of the scenario.
-It is typically something that happened in the *past*.
+`Given` Steps are used to describe the initial context of the system---the
+*scene* of the Scenario. It is typically something that happened in the *past*.
 
-When Cucumber executes a `Given` step it will configure the system to be in a well-defined state,
-such as creating and configuring objects or adding data to the test database.
 
-It's ok to have several `Given` steps (just use `And` or `But` for number 2 and upwards to make it more readable).
+When Cucumber executes a `Given` Step, it will configure the system to be in a
+well-defined state, such as creating and configuring objects or adding data to
+the test database.
+
+
+It's okay to have several `Given` Steps. To keep them readable, simply use 
+`And` or `But` instead of `Given` after the first one.
+
 
 #### When
 
-`When` steps are used to describe an event, or an *action*. This can be a person interacting with the
-system, or it can be an event triggered by another system.
+`When` Steps are used to describe an event, or an *action*. This can be a
+person interacting with the system, or it can be an event triggered by another
+system.
 
-It's strongly recommended you only have a single `When` step per scenario. If you feel compelled to
-add more it's usually a sign that you should split the scenario up in multiple scenarios.
+It's strongly recommended you only have a single `When` Step per Scenario. If
+you feel compelled to add more, it's usually a sign that you should split the
+Scenario up into multiple Scenarios.
+
 
 #### Then
 
-`Then` steps are used to describe an *expected* outcome, or result.
+`Then` Steps are used to describe an *expected* outcome, or result.
 
-The [step definition](/cucumber/step-definitions/) of a `Then` step should use an *assertion* to
-compare the *actual* outcome (what the system actually does) to the *expected* outcome
-(what the step says the system is supposed to do).
+The [Step Definition](/cucumber/Step-definitions/) of a `Then` Step should use
+an *assertion* to compare the *actual* outcome (what the system actually does)
+to the *expected* outcome (what the Step says the system is supposed to do).
+
 
 ### Background
 
-Occasionally you'll find yourself repeating the same `Given` steps in all of the scenarios
-in a feature file. Since it is repeated in every scenario it is an indication that those steps
-are not *essential* to describe the scenarios, they are *incidental details*.
+Occasionally you'll find yourself repeating the same `Given` Steps in all of
+the Scenarios in a Feature file. Since it is repeated in every Scenario it is
+an indication that those Steps are not *essential* to describe the Scenarios,
+they are *incidental details*.
 
-You can literally move such `Given` steps to the background by grouping them under a
-`Background` section before the first scenario:
+
+You can literally move such `Given` Steps to the Background. Simply group them 
+under a `Background` section before the first Scenario:
 
 ```gherkin
 Background:
@@ -153,7 +174,8 @@ Background:
 
 ## Scenario Outlines
 
-Copying and pasting scenarios to use different values quickly becomes tedious and repetitive:
+Copying and pasting Scenarios to use different values quickly becomes tedious 
+and repetitive:
 
 ```gherkin
 Scenario: eat 5 out of 12
@@ -167,7 +189,9 @@ Scenario: eat 5 out of 20
   Then I should have 15 cucumbers
 ```
 
-Scenario outlines allow us to more concisely express these examples through the use of a template with placeholders, using `Scenario Outline`, `Examples` with tables and `< >` delimited parameters:
+Scenario Outlines allow more concise expression of these examples through the
+use of a template with placeholders, using `Scenario Outline`, `Examples` with
+tables and `< >` delimited parameters:
 
 ```gherkin
 Scenario Outline: eating
@@ -181,19 +205,25 @@ Scenario Outline: eating
     |  20   |  5  |  15  |
 ```
 
-The Scenario Outline steps provide a template which is never directly run. A Scenario Outline is run once for each row in the `Examples` section beneath it (not counting the first row).
+A Scenario Outline's Steps provide a template which is never directly run. A
+Scenario Outline is run once for each row in the `Examples` section beneath it
+(not counting the first row).
 
-The way this works is via placeholders. Placeholders must be contained within `< >` in the Scenario Outline's steps. For example:
+The way this works is via placeholders. Placeholders must be contained within
+`< >` in the Scenario Outline's Steps. For example:
 
 ```gherkin
 Given <I'm a placeholder and I'm ok>
 ```
 
-The placeholders indicate that when the Examples row is run they should be substituted with real values from the `Examples` table. If a placeholder name is the same as a column title in the `Examples` table then this is the value that will replace it.
+The placeholders indicate that when the Examples row is run they should be
+substituted with real values from the `Examples` table. If a placeholder name
+is the same as a column title in the `Examples` table then this is the value
+that will replace it.
 
 You can also use placeholders in [[Multiline Step Arguments]].
 
-**IMPORTANT:** *Your step definitions will never have to match a placeholder. They will need to match the values that will replace the placeholder*
+**IMPORTANT:** *Your Step definitions will never have to match a placeholder. They will need to match the _values_ that will _replace_ the placeholder.*
 
 So when running the first row of our example:
 
@@ -203,7 +233,7 @@ Examples:
   |  12   |  5  |  7   |
 ```
 
-The scenario that is actually run is:
+The Scenario that is actually run is:
 
 ```gherkin
 Scenario Outline: eating
@@ -212,9 +242,9 @@ Scenario Outline: eating
   Then I should have 7 cucumbers    # <left> replaced with 7
 ```
 
-While `scenario outlines` help minimize redundancy, they aren't necessarily easier to read from a business or narrative perspective. Remember to choose `examples` that illustrate something new about the `feature`.
+While `Scenario outlines` help minimize redundancy, they aren't necessarily easier to read from a business or narrative perspective. Remember to choose `Examples` that illustrate something new about the `Feature`.
 
-One way to make sure that your `examples` are contributing to the full picture of the `feature` is to break them into multiple tables. Whenever possible, include plain-text descriptions of the underlying rules and break the examples up to illustrate these rules.
+One way to ensure that your `Examples` are contributing to the full picture of the `Feature` is to break them into multiple tables. Whenever possible, include plain-text descriptions of the underlying rules and break the examples up to illustrate these rules.
 
 Here is an example from [The Cucumber Book](https://pragprog.com/book/hwcuc/the-cucumber-book) (p.74):
 
@@ -233,7 +263,9 @@ Scenario Outline: Password validation
   | abcd1    | valid            |
 ```
 
-In that feature, it isn't clear why certain passwords are valid or invalid. By reformatting the examples into two tables with descriptive text, the scenario outline becomes much more effective (p.75):
+In this Feature, it isn't clear why certain passwords are valid or invalid. 
+
+By reformatting the examples into two tables with descriptive text, the Scenario Outline becomes much more effective (p.75):
 
 ```gherkin
 Feature: Account Creation
